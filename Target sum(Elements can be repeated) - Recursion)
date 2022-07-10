@@ -1,0 +1,45 @@
+#include <iostream>
+#include<vector>
+
+using namespace std;
+
+void ans(int i,int n,vector<int> &ds,int a[],int k,int target,vector<vector<int>> &anss){
+        if(k==0){
+            anss.push_back(ds);
+            for(int j=0;j<ds.size();j++){
+                cout<<ds[j];
+            }
+            cout<<endl;
+            return;
+        }
+        else if(i==n){
+            return;
+        }
+        else{
+    
+    
+    if(a[i]<=k){
+        ds.push_back(a[i]);
+        ans(i,n,ds,a,k-a[i],target,anss);
+        ds.pop_back();
+        
+    }
+    ans(i+1,n,ds,a,k,target,anss);
+        }
+}
+
+
+
+int main()
+{
+    vector<int> ds;
+    vector<vector<int>> anss;
+    int a[]={1,1,2,3};
+    int n=4;
+    int target=5;
+    int k=target;
+    int i=0;
+    ans(i,n,ds,a,k,target,anss);
+
+    return 0;
+}
