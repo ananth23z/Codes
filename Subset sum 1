@@ -1,0 +1,32 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+
+void ans(int a[] , vector<int> &ds , vector<int> &sum , int n , int i){
+    if(i==n){
+        int x=0;
+        for(int j=0;j<ds.size();j++){
+            x=x+ds[j];
+        }
+        sum.push_back(x);
+        return;
+    }
+    ds.push_back(a[i]);
+    ans(a,ds,sum,n,i+1);
+    ds.pop_back();
+    ans(a,ds,sum,n,i+1);
+    
+}
+
+ int main(){
+    int a[] = {3,2,1};
+    int n =3;
+    int i=0;
+    vector<int> ds;
+    vector<int> sum;
+    ans(a,ds,sum,n,i);
+    for(int j=0;j<sum.size();j++){
+        cout<<" "<<sum[j];
+    }
+}
