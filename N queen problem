@@ -1,0 +1,75 @@
+#include<iostream>
+#include<vector>
+#include<string>
+#include <bits/stdc++.h>
+using namespace std;
+static int x=0;
+
+bool isSafe(int n ,int row , int col , vector<string> &board){
+    int locRow = row;
+    int locCol = col;
+    while(row>=0&&col>=0){
+        if(board[row][col]=='Q'){
+            return false;
+        }
+        row--;
+        col--;
+    }
+    row = locRow;
+    col=locCol;
+    while(col>=0){
+        if(board[row][col]=='Q'){
+            return false;
+        }
+        col--;
+    }
+    row = locRow;
+    col=locCol;
+    while(col>=0 && row<n){
+        if(board[row][col]=='Q'){
+            return false;
+        }
+        col--;
+        row++;
+    }
+    return true;
+}
+
+
+
+void solvedNqueen(vector<vector<string>> &ans , vector<string>&board , int n ,int col ){
+       if(col==n){
+           ans.push_back(board);
+           for(int k =0;k<n;k++){
+               for(int l =0;l<n;l++){
+                   cout<<"  "<< board[k][l];
+               }
+               cout<<endl;
+           }
+           x++;
+           cout<<"Pattern No -"<<x<<endl;
+           return;
+       } 
+       
+       for(int row=0;row<n;row++){
+           if(isSafe(n,row,col,board)){
+               board[row][col]='Q';
+               solvedNqueen(ans , board , n ,  col+1 );
+               board[row][col]='.' ;
+           }
+       }
+}
+
+
+int main(){
+    vector<vector<string>> ans;
+    int n=5;
+    vector<string> board(n);  //      these 3 lines have created a type of n*n board and 
+    string s(n , '.');        //      each row contains a string of size n
+    for(int i=0;i<n;i++){     //
+        board[i]=s;
+    }
+    int col = 0;
+    solvedNqueen(ans,board,n,col);
+    cout<<x;
+}
