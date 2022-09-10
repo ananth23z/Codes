@@ -1,0 +1,36 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+void print(vector<char> &ds , int n , int nums[] , string a){
+    if(ds.size()==n){
+        for(int j=0;j<n;j++){
+            cout<<ds[j];
+        }
+        cout<<endl;
+        return;
+    }
+    
+    for(int j=0;j<n;j++){
+        if(nums[j]==0){
+            ds.push_back(a[j]);
+            nums[j]=1;
+            print(ds,n,nums,a);
+            nums[j]=0;
+            ds.pop_back();
+        }
+    }
+}
+
+
+int main(){
+   string a = "jkl";
+   int n = a.size();
+   vector<char> ds;
+   int nums[n];
+   for(int j =0;j<n;j++){
+       nums[j]=0;
+   }
+   print(ds,n,nums,a);
+   
+}
