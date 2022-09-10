@@ -1,0 +1,24 @@
+#include<iosstream>
+#include<vector>
+using namespace std;
+int main(){
+  int noOfNodes ;    // number of nodes
+  int noOfEdges;     // number of edges 
+  cin>>noOfNodes>>noOfEdges;
+  int adjMatrix[noOfNodes+1][noOfNodes+1];   // creating adj matrix for storing the edges
+  for(int i=0;i<n+1;i++){
+      for(int j=0;j<n+1;j++){
+          adjMatrix[i][j]=0;     
+      }
+  }
+  
+  for(int i=0;i<noOfEdges;i++){
+      int v;
+      int u;
+      cin>>v>>u;                 // for storing the edges in adj matrix
+      adjMatrixp[v][u]=1;
+      adjMatrixp[u][v]=1;
+  }
+  
+  
+}
