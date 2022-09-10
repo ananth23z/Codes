@@ -1,0 +1,39 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+int main(){
+   int noOfNode ;
+   int noOfEdge ;
+   cin>>noOfNode>>noOfEdge;
+   
+/*
+   vector<int> adjList[noOfEdge+1];
+      for(int i=0;i<noOfEdge;i++){
+          int v;                         adj list without weights in graph
+          int u;
+          cin>>v>>u;
+          adjList[u].push_back(v);
+          adjList[v].push_back(u);
+      }    */
+  /* 
+  vector<pair<int,int>> adjList[noOfEdge+1];
+    for(int i=0;i<noOfEdge;i++){
+        int v;
+        int u;
+        int w;                       adj list with weights in graph
+        cin>>v>>u>>w;
+        adjList[v].push_back({u,w});
+        adjList[u].push_back({v,w});
+    }  */
+    
+  /*
+     vector<pair<int,int>> adjList[noOfEdge+1];
+    for(int i=0;i<noOfEdge;i++){
+        int v;
+        int u;
+        int w;                   // adj list with directed edge from v to u
+        cin>>v>>u>>w;
+        adjList[v].push_back({u,w});
+    }   */
+
+}
