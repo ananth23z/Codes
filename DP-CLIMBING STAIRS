@@ -1,0 +1,34 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int anss(int n , int dp[]){
+    if(dp[n]!=0){
+        return dp[n];
+    }
+    if(n==0){
+        return 1;
+    }
+    if(n==-1){
+        return 0;
+    }
+    if(n==1){
+        return 1;
+    }
+    int l = anss(n-1,dp);
+    int r = anss(n-2,dp);
+    dp[n]=l+r;
+    return l+r;
+}
+
+
+int main(){
+    int n;
+    cin>>n;
+    int dp[n+1];
+    for(int i=0;i<n+1;i++){
+        dp[i]=0;
+    }
+    cout<<anss(n,dp);
+    
+}
