@@ -1,0 +1,27 @@
+#include<iostream>
+#include<vector>
+#include<bits/stdc++.h>
+using namespace std;
+
+int ans(int n , int a[]){
+    if(n==0){
+        return 0;
+    }
+    
+    int l=ans(n-1,a) + abs(a[n]-a[n-1]);
+    int r=INT_MAX;
+    if(n>1){
+    int r=ans(n-2,a)+abs(a[n]-a[n-2]);
+    }
+    return min(l,r);
+}
+
+
+
+int main(){
+    int a[]={10,20,30,10};
+    int n=3;
+    cout<<ans(3 , a);
+    
+    
+}
