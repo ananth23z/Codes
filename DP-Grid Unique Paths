@@ -1,0 +1,31 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+
+int ans(vector<vector<int>>&m , int r , int c,vector<vector<int>>&dp){
+    if(r==0&&c==0){
+        return 1;
+    }
+    if(r<0||c<0){
+        return 0;
+    }
+     if(dp[r][c]!=-1){
+        return dp[r][c];
+    } 
+    int u=ans(m,r-1,c,dp);
+    int l=ans(m,r,c-1,dp);
+    dp[r][c]=u+l;
+    return u+l;
+}
+
+
+int main(){
+    vector<vector<int>>m(3,vector<int>(3,-1));
+    int r=3;
+    int c=2;
+    vector<vector<int>>dp(3,vector<int>(3,-1));
+    int a=ans(m,r-1,c-1,dp);
+    cout<<a;
+    
+}
