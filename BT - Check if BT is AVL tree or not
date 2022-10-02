@@ -1,0 +1,55 @@
+#include<iostream>
+#include<vector>
+#include<bits/stdc++.h>
+using namespace std;
+
+struct node{
+    int data;
+    node *l;
+    node *r;
+    node(int val){
+        data=val;
+        l=r=NULL;
+    }
+    
+};
+
+int maxH(node *a){
+    if(a==NULL){
+        return 0;
+    }
+    int l=1+maxH(a->l);
+    int r=1+maxH(a->r);
+    return max(l,r);
+}
+
+
+bool balCheck(node *a){
+    if(a==NULL){
+        return true;
+    }
+    int lh = 1+maxH(a->l);
+    int rh = 1+maxH(a->r);
+    if(abs(lh-rh)>1) return false;
+    bool left = balCheck(a->l);
+    bool right = balCheck(a->r);
+    if(!left || !right) return false;
+    return true;
+}
+
+
+int main(){
+    node *root = new node(1);
+    root->l=new node(2);
+    root->r=new node(3);
+    root->r->l=new node(4);
+    root->r->r=new node(5);
+    root->r->r->r=new node(6);
+    if(balCheck(root)){
+        cout<<"Yes it's AVL Tree";
+    }
+    else{
+        cout<<"No it's not AVL Tree";
+    }
+    
+}
