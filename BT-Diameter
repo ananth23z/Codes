@@ -1,0 +1,51 @@
+#include<iostream>
+#include<vector>
+#include<bits/stdc++.h>
+using namespace std;
+
+int maxi=INT_MIN;
+
+struct node{
+    int data;
+    struct node *l;
+    struct node *r;
+    node(int a){
+        data=a;
+        l=r=NULL;
+    }
+};
+
+
+int maxx(node * a){
+    if(a==NULL){
+        return 0;
+    }
+    int lh=1+maxx(a->l);
+    int rh=1+maxx(a->r);
+    return max(lh,rh);
+}
+
+void diameter(node *a){
+    if(a==NULL){
+        return ;
+    }
+    int mlh=maxx(a->l);
+    int mrh=maxx(a->r);
+    maxi=max(maxi,mlh+mrh);
+    diameter(a->l);
+    diameter(a->r);
+    return;
+    
+    
+}
+
+int main(){
+    struct node *rt = new node(1);
+    rt->l=new node(2);
+    rt->r=new node(3);
+    rt->l->l=new node(4);
+    rt->l->r=new node(5);
+    diameter(rt);
+    cout<<maxi;
+    
+}
