@@ -1,0 +1,68 @@
+#include<iostream>
+#include<vector>
+#include<bits/stdc++.h>
+using namespace std;
+
+int f(vector<vector<int>>&m ,int r , int c ,  vector<vector<int>>&dp){
+                if(dp[r][c]!=-1 &&c>-1 && c<4){
+                    return dp[r][c];
+                }
+                if(r==3 && c>-1 && c<4){
+                    return m[r][c];
+                }
+            else if(c<0||c>3){
+                
+                    return INT_MIN;
+                }
+            else if(r==0&&c==0){
+                    int max11=INT_MIN;
+                    for(int j=0;j<4;j++){
+                        int b=m[r][j] + f(m,r+1,j-1,dp);
+                        int n=m[r][j] + f(m,r+1,j,dp);
+                        int m1=m[r][j] + f(m,r+1,j+1,dp);
+                        int m2=max(b,n);
+                        int m3=max(m1,m2);
+                        max11=max(max11,m3);
+                    }
+                    return max11;
+                }
+                else{
+                    int lr=m[r][c] + f(m,r+1,c-1,dp);
+                    int d=m[r][c]  + f(m,r+1,c,dp);
+                    int rd = m[r][c] + f(m,r+1,c+1,dp);
+                    int z1=max(lr,d);
+                    int z2=max(rd,z1);
+                    dp[r][c]=z2;
+                    return z2;
+                    
+                }
+}
+
+
+int main(){
+    vector<vector<int>>m(4,vector<int>(4,-1));
+            m[0][0]=1;
+            m[0][1]=2;
+            m[0][2]=10;
+            m[0][3]=4;
+            m[1][0]=100;
+            m[1][1]=3;
+            m[1][2]=2;
+            m[1][3]=1;
+            m[2][0]=1;
+            m[2][1]=1;
+            m[2][2]=20;
+            m[2][3]=2;
+            m[3][0]=1;
+            m[3][1]=2;
+            m[3][2]=2;
+            m[3][3]=1;
+    vector<vector<int>>dp(4,vector<int>(4,-1));
+    
+    
+    int r=0;
+    int c=0;
+    int ans = f(m,r,c,dp);
+    cout<<ans;
+    
+}
