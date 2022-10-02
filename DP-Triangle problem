@@ -1,0 +1,29 @@
+#include<iostream>
+#include<vector>
+#include<bits/stdc++.h>
+using namespace std;
+
+
+int f(vector<vector<int>>&m , int r , int c ){
+    if(r==3){
+        return m[r][c];
+    }
+    
+    int d=m[r][c] + f(m,r+1,c,i++);
+    int dr=m[r][c] + f(m,r+1,c+1,i++);
+    return min(d,dr);
+    
+}
+
+
+
+int main(){
+/*   1
+     2 3                     this is input
+     3 6 7
+     8 9 10 11   */
+     vector<vector<int>>m(4,vector<int>(4,-1));
+    int r=0;
+    int c=0;
+    f(m,r,c);
+}
