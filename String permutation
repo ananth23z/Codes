@@ -1,36 +1,40 @@
-#include<iostream>
+#include <iostream>
 #include<vector>
+#include<bits/stdc++.h>
 using namespace std;
 
-void print(vector<char> &ds , int n , int nums[] , string a){
+void f(string w , string ds , vector<string>&ans , int n , int inx[]){
     if(ds.size()==n){
-        for(int j=0;j<n;j++){
-            cout<<ds[j];
-        }
-        cout<<endl;
+        ans.push_back(ds);
         return;
+        
     }
-    
-    for(int j=0;j<n;j++){
-        if(nums[j]==0){
-            ds.push_back(a[j]);
-            nums[j]=1;
-            print(ds,n,nums,a);
-            nums[j]=0;
+    for(int i=0;i<w.size();i++){
+        if(inx[i]==0){
+            inx[i]=1;
+            ds.push_back(w[i]);
+            f(w,ds,ans,n,inx);
+            inx[i]=0;
             ds.pop_back();
         }
     }
 }
 
-
-int main(){
-   string a = "jkl";
-   int n = a.size();
-   vector<char> ds;
-   int nums[n];
-   for(int j =0;j<n;j++){
-       nums[j]=0;
-   }
-   print(ds,n,nums,a);
-   
+int main()
+{
+        string w = "abc";
+        sort(w.begin() , w.end());
+        vector<string>ans;
+        string ds;
+        int n=w.size();
+        int inx[n]={0};
+        f(w,ds,ans,n,inx);
+        
+        for(int i=0;i<ans.size();i++){
+            cout<<ans[i];
+            cout<<endl;
+        }
+        
+        
+        
 }
