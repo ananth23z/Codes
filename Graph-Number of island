@@ -1,0 +1,44 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void bfs(eint n , int m , vector<vector<char>>&grid , vector<vector<int>>vis){
+    vis[n][m]==1;
+    queue<pair<int,int>>q;
+    q.push({n,m});
+    
+    while(!q.empty()){
+        int n=q.front().first;
+        int m=q.front().second;
+        q.pop();
+            for(int row=-1;row<=1;row++){
+                for(int col=-1;col<=1;col++){
+                    int row1=n+row;
+                    int col1=m+col;
+                    if(row1>=0&&row1<m&&col1>=0&&col1<n&&grid[row1][col1]=='1'&&vis[row1][col1]==0){
+                        vis[row1][col1]=1;
+                        q.push({row1,col1});
+                    }
+                }
+            }
+    }
+}
+
+int main()
+{
+    vector<vector<char>>grid;    
+    int v;   // total nodes
+    int n=grid.size();
+    int m=grid[0].size();
+    vector<vector<int>>vis(n,vector<int>(m,0));
+    int count=0;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            if(vis[i][j]==0 && grid[i][j)=='1'){
+                count++;
+                bfs(i,j,grid,vis);
+            }
+        }
+    }
+    return 0;
+}
