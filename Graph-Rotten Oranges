@@ -45,4 +45,6 @@ class Solution{
                  }
              }
          }
+         if(cntFresh!=cnt) return -1;
+         return tm;
 }
