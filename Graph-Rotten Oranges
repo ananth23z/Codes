@@ -39,12 +39,16 @@ class Solution{
                      int ncol=c+dcol;
                      if(nrow>=0 && nrow<n && ncol>=0 && ncol<n && vis[nrow][ncol]==0 && grid[nrow][ncol]==1){
                          q.push({{nrow,ncol},t+1);
-                         vis[nrow][ncol];
+                         vis[nrow][ncol]=2;
                          cnt++;
                      }
                  }
              }
          }
-         if(cntFresh!=cnt) return -1;
-         return tm;
+         if(cntFresh==cnt){
+             return tm;
+         }
+         else{
+             return -1;
+         }
 }
