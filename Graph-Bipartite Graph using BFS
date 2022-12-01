@@ -1,0 +1,40 @@
+#include<vector> 
+#include<iostream>
+
+class Solution{
+    private:
+     bool check(int start , int V , vector<int>adj[] , int col[] , int colour[]){
+         queue<int> q;
+         q.push(start);
+         colour[start]=0;
+         while(!q.empty()){
+             int node = q.front();
+             q.pop();
+             for(auto it : adj[node]){
+                 if(colour[it]==-1){
+                     colour[it]=!colour[node];
+                     q.push(it);
+                 }
+                 else if(colour[it]==colour[node]){
+                     return false;
+                 }
+             }
+         }
+         return true;
+     }
+    public:
+     bool isBipartite(int V , vector<int>adj[]){
+         int colour[V];
+         for(int i=0;i<V;i++){
+             colour[i]=-1;
+         }
+         for(int i=0;i<V;i++){
+             if(colour[i]==-1){
+                 if(check(i,V,adj,col,colour)==false){
+                     return false;
+                 }
+             }
+         }
+         return true;
+     }
+}
