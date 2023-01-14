@@ -1,0 +1,46 @@
+#include <iostream>
+#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
+
+int longest_cycle_length;
+
+
+void dfs(vector<int> adjList[] , int node , unordered_map<int,int> &node_distance , int l , 
+vector<int> &ans , int vis[]){
+   if(vis[node]){
+       if(node_distance.find(node) != node_distance.end()){
+           int n1 = l-node_distance[node];
+           ans.push_back(n1);
+           longest_cycle_length = max(longest_cycle_length,l-node_distance[node]);
+       }
+       return;
+   }
+     vis[node]=1;
+     node_distance[node]=l;
+     for(auto it : adjList[node]){
+         dfs(adjList , it , node_distance , l+1 , ans , vis);
+     }
+}
+
+
+int main()
+{
+    int a[23] = {4,4,1,4,13,8,8,8,0,8,14,9,15,11,-1,10,15,22,22,22,22,22,21};
+    vector<int> adjList[23];
+    for(int i=0;i<23;i++){
+        adjList[i].push_back(a[i]);
+    }
+    int vis[23]={0};
+    vector<int> ans;
+    for(int i=0;i<23;i++){
+        if(vis[i]==0){
+            unordered_map<int,int> node_distance;
+            dfs(adjList , i , node_distance , 0 , ans , vis);
+        }
+    }
+   // cout<<longest_cycle_length;
+   for(auto it : ans){
+       cout<<it<<" ";
+   }
+}
