@@ -1,0 +1,60 @@
+#include <iostream>
+#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
+
+void dfs(int node , vector<int> adjList[] , int vis[] , int l , int dis[]){
+    if(vis[node]==1){
+        return;
+    }
+    vis[node]=1;
+    dis[node]=l;
+    
+        for(auto it : adjList[node]){
+        
+                dfs(it , adjList , vis , l+1 , dis);
+            
+        }
+}
+
+int main()
+{
+    int a[23] = {4,4,1,4,13,8,8,8,0,8,14,9,15,11,-1,10,15,22,22,22,22,22,21};
+    vector<int> adjList[23];
+    for(int i=0;i<23;i++){
+        adjList[i].push_back(a[i]);
+    }
+   int s1 = 9;
+   int s2 = 2;
+   
+   int dis1[23];
+   int dis2[23];
+   
+   for(int i=0;i<23;i++){
+       dis1[i]=-1;
+       dis2[i]=-1;
+   }
+   
+   int vis1[23]={0};
+   int vis2[23]={0};
+   
+   dfs(s1,adjList,vis1,0,dis1);
+   dfs(s2,adjList,vis2,0,dis2);
+   int sumMin=INT_MAX;
+   int inx;
+    for(int i=0;i<23;i++){
+        if(dis1[i]==-1 || dis2[i]==-1){
+            continue;
+        }
+        else{
+            int sum = dis1[i]+dis2[i];
+            if(sum<sumMin){
+                inx=i;
+                sumMin=sum;
+            }
+        }
+    }
+    cout<<inx;
+    
+
+}
